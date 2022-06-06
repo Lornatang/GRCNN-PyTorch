@@ -13,7 +13,6 @@
 # ==============================================================================
 import torch
 from torch import nn
-from torch.nn import functional as F
 
 __all__ = [
     "GRCNN",
@@ -49,11 +48,11 @@ class _GRCLUnit(nn.Module):
         self.gx_bn = nn.BatchNorm2d(channels)
 
     def forward(self, wgf: torch.Tensor, wgx: torch.Tensor, wf: torch.Tensor, wx: torch.Tensor):
-        gated = F.sigmoid(self.wgf_bn(wgf) + self.wgr_bn(wgx))
+        gated = torch.sigmoid(self.wgf_bn(wgf) + self.wgr_bn(wgx))
         wf = self.wf_bn(wf)
         wx = self.wx_bn(wx)
 
-        out = F.relu(wf + self.gx_bn(wx * gated))
+        out = torch.relu(wf + self.gx_bn(wx * gated))
 
         return out
 
@@ -75,7 +74,7 @@ class _GRCL(nn.Module):
     def forward(self, inputs):
         wgf = self.wgf_u(inputs)
         wf = self.wf_u(inputs)
-        out = F.relu(self.bn_x(self.wf))
+        out = torch.relu(self.bn_x(wf))
 
         for i in range(self.num_iterations):
             out = self.GRCL[i](wgf, self.wgr_x(out), wf, self.wg_x(out))

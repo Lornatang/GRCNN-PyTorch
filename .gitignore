@@ -146,5 +146,6 @@ samples
 *.mp4
 *.zip
 *.csv
+*.txt
 *.pth.tar
 *.mdb
