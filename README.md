@@ -1,26 +1,25 @@
-# CRNN-PyTorch
+# GRCNN-PyTorch
 
 ## Overview
 
 This repository contains an op-for-op PyTorch reimplementation
-of [An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition](https://arxiv.org/abs/1507.05717)
-.
+of [Gated Recurrent Convolution Neural Network for OCR](https://dl.acm.org/doi/pdf/10.5555/3294771.3294803).
 
 ## Table of contents
 
-- [CRNN-PyTorch](#crnn-pytorch)
-  - [Overview](#overview)
-  - [Table of contents](#table-of-contents)
-  - [Download weights](#download-weights)
-  - [Download datasets](#download-datasets)
-  - [How Test and Train](#how-test-and-train)
-    - [Test](#test)
-    - [Train CRNN model](#train-crnn-model)
-    - [Resume train CRNN model](#resume-train-crnn-model)
-  - [Result](#result)
-  - [Contributing](#contributing)
-  - [Credit](#credit)
-    - [An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition](#an-end-to-end-trainable-neural-network-for-image-based-sequence-recognition-and-its-application-to-scene-text-recognition)
+- [GRCNN-PyTorch](#grcnn-pytorch)
+    - [Overview](#overview)
+    - [Table of contents](#table-of-contents)
+    - [Download weights](#download-weights)
+    - [Download datasets](#download-datasets)
+    - [How Test and Train](#how-test-and-train)
+        - [Test](#test)
+        - [Train GRCNN model](#train-grcnn-model)
+        - [Resume train GRCNN model](#resume-train-grcnn-model)
+    - [Result](#result)
+    - [Contributing](#contributing)
+    - [Credit](#credit)
+        - [An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition](#an-end-to-end-trainable-neural-network-for-image-based-sequence-recognition-and-its-application-to-scene-text-recognition)
 
 ## Download weights
 
@@ -43,29 +42,30 @@ Both training and testing only need to modify the `config.py` file.
 ### Test
 
 - line 40: `mode` change to `test`.
-- line 79: `model_path` change to `results/pretrained_models/CRNN-MJSynth-e9341ede.pth.tar`.
+- line 80: `model_path` change to `results/pretrained_models/GRCNN-MJSynth-e9341ede.pth.tar`.
 
-### Train CRNN model
-
-- line 40: `mode` change to `train`.
-- line 42: `exp_name` change to `CRNN_MJSynth`.
-
-### Resume train CRNN model
+### Train GRCNN model
 
 - line 40: `mode` change to `train`.
-- line 42: `exp_name` change to `CRNN_MJSynth`.
-- line 56: `resume` change to `samples/CRNN_MJSynth/epoch_xxx.pth.tar`.
+- line 42: `exp_name` change to `GRCNN_MJSynth`.
+
+### Resume train GRCNN model
+
+- line 40: `mode` change to `train`.
+- line 42: `exp_name` change to `GRCNN_MJSynth`.
+- line 56: `resume` change to `samples/GRCNN_MJSynth/epoch_xxx.pth.tar`.
 
 ## Result
 
-Source of original paper results: [https://arxiv.org/pdf/1507.05717.pdf](https://arxiv.org/pdf/1507.05717.pdf)
+Source of original paper
+results: [https://dl.acm.org/doi/pdf/10.5555/3294771.3294803](https://dl.acm.org/doi/pdf/10.5555/3294771.3294803)
 
 In the following table, `-` indicates show no test.
 
-|    Model    | IIIT5K(None) | SVT(None) | IC03(None) | IC13(None) |
-|:-----------:|:------------:|:---------:|:----------:|:----------:|
-| CRNN(paper) |     78.2     |   80.8    |    89.4    |    86.7    |
-| CRNN(repo)  |   **81.5**   | **80.1**  |   **-**    |   **-**    |
+|    Model    | IIIT5K(None) | SVT(None) | IC03(None) |
+|:-----------:|:------------:|:---------:|:----------:|
+| CRNN(paper) |     80.8     |   81.5    |    91.2    |
+| CRNN(repo)  |   **81.5**   | **80.1**  |   **-**    |
 
 ```bash
 # Download `CRNN-Synth90k-e9341ede.pth.tar` weights to `./results/pretrained_models`
@@ -92,38 +92,33 @@ I look forward to seeing what the community does with these models!
 
 ## Credit
 
-### An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition
+### Gated Recurrent Convolution Neural Network for OCR
 
-_Baoguang Shi, Xiang Bai, Cong Yao_ <br>
+_Jianfeng Wang, Xiaolin Hu_ <br>
 
 **Abstract** <br>
-Image-based sequence recognition has been a long-standing research topic in computer vision. In this paper, we
-investigate the problem of scene text recognition, which is among the most important and challenging tasks in
-image-based sequence recognition. A novel neural network architecture, which integrates feature extraction, sequence
-modeling and transcription into a unified framework, is proposed. Compared with previous systems for scene text
-recognition, the proposed architecture possesses four distinctive properties: (1) It is end-to-end trainable, in
-contrast to most of the existing algorithms whose components are separately trained and tuned. (2) It naturally handles
-sequences in arbitrary lengths, involving no character segmentation or horizontal scale normalization. (3) It is not
-confined to any predefined lexicon and achieves remarkable performances in both lexicon-free and lexicon-based scene
-text recognition tasks. (4) It generates an effective yet much smaller model, which is more practical for real-world
-application scenarios. The experiments on standard benchmarks, including the IIIT-5K, Street View Text and ICDAR
-datasets, demonstrate the superiority of the proposed algorithm over the prior arts. Moreover, the proposed algorithm
-performs well in the task of image-based music score recognition, which evidently verifies the generality of it.
+Optical Character Recognition (OCR) aims to recognize text in natural images.
+Inspired by a recently proposed model for general image classification, Recurrent
+Convolution Neural Network (RCNN), we propose a new architecture named
+Gated RCNN (GRCNN) for solving this problem. Its critical component, Gated
+Recurrent Convolution Layer (GRCL), is constructed by adding a gate to the
+Recurrent Convolution Layer (RCL), the critical component of RCNN. The gate
+controls the context modulation in RCL and balances the feed-forward information
+and the recurrent information. In addition, an efficient Bidirectional Long ShortTerm Memory (BLSTM) is built for
+sequence modeling. The GRCNN is combined
+with BLSTM to recognize text in natural images. The entire GRCNN-BLSTM
+model can be trained end-to-end. Experiments show that the proposed model
+outperforms existing methods on several benchmark datasets including the IIIT-5K,
+Street View Text (SVT) and ICDAR
 
-[[Paper]](https://arxiv.org/pdf/1507.05717) [[Code(Lua)]](https://github.com/bgshih/crnn)
+[[Paper]](https://dl.acm.org/doi/pdf/10.5555/3294771.3294803) [[Code(Lua)]](https://github.com/Jianf-Wang/GRCNN-for-OCR)
 
 ```bibtex
-@article{ShiBY17,
-  author    = {Baoguang Shi and
-               Xiang Bai and
-               Cong Yao},
-  title     = {An End-to-End Trainable Neural Network for Image-Based Sequence Recognition
-               and Its Application to Scene Text Recognition},
-  journal   = {{IEEE} Trans. Pattern Anal. Mach. Intell.},
-  volume    = {39},
-  number    = {11},
-  pages     = {2298--2304},
-  year      = {2017}
+@inproceedings{jianfeng2017deep,
+ author    = {Wang, Jianfeng and Hu, Xiaolin},
+ title     = {Gated Recurrent Convolution Neural Network for OCR},
+ booktitle = {Advances in Neural Information Processing Systems},
+ year      = {2017}
 }
 ```
 
