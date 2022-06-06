@@ -46,7 +46,7 @@ if mode == "train":
     train_dataroot = "./data/MJSynth"
     annotation_train_file_name = "annotation_train.txt"
     # Test dataset
-    test_dataroot = "./data/IIIT5K"
+    test_dataroot = "./data/SVT"
     annotation_test_file_name = "annotation_test.txt"
 
     batch_size = 192
@@ -71,10 +71,10 @@ if mode == "test":
 
     # The path and name of the folder where the verification results are saved
     result_dir = "./results/test"
-    result_file_name = "IIIT5K_result.txt"
+    result_file_name = "SVT_result.txt"
 
     # The directory path where the dataset to be verified is located
-    dataroot = "./data/IIIT5K"
+    dataroot = "./data/SVT"
     annotation_file_name = "annotation_test.txt"
 
     model_path = "results/pretrained_models/GRCNN-MJSynth-e9341ede.pth.tar"
