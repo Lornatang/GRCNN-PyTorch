@@ -56,7 +56,7 @@ if mode == "train":
     resume = ""
 
     # Total num epochs
-    epochs = 5
+    epochs = 8
 
     # Adadelta optimizer parameter
     model_lr = 1.0
