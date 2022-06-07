@@ -19,7 +19,7 @@ of [Gated Recurrent Convolution Neural Network for OCR](https://dl.acm.org/doi/p
     - [Result](#result)
     - [Contributing](#contributing)
     - [Credit](#credit)
-        - [An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition](#an-end-to-end-trainable-neural-network-for-image-based-sequence-recognition-and-its-application-to-scene-text-recognition)
+        - [Gated Recurrent Convolution Neural Network for OCR](#gated-recurrent-convolution-neural-network-for-ocr)
 
 ## Download weights
 
@@ -42,7 +42,7 @@ Both training and testing only need to modify the `config.py` file.
 ### Test
 
 - line 40: `mode` change to `test`.
-- line 80: `model_path` change to `results/pretrained_models/GRCNN-MJSynth-e9341ede.pth.tar`.
+- line 80: `model_path` change to `results/pretrained_models/GRCNN-MJSynth-4a8f5d33.pth.tar`.
 
 ### Train GRCNN model
 
@@ -62,15 +62,15 @@ results: [https://dl.acm.org/doi/pdf/10.5555/3294771.3294803](https://dl.acm.org
 
 In the following table, `-` indicates show no test.
 
-|    Model    | IIIT5K(None) | SVT(None) | IC03(None) |
-|:-----------:|:------------:|:---------:|:----------:|
-| CRNN(paper) |     80.8     |   81.5    |    91.2    |
-| CRNN(repo)  |   **81.5**   | **80.1**  |   **-**    |
+|    Model     | IIIT5K(None) | SVT(None) | IC03(None) |
+|:------------:|:------------:|:---------:|:----------:|
+| GRCNN(paper) |     80.8     |   81.5    |    91.2    |
+| GRCNN(repo)  |   **81.6**   | **79.3**  |   **-**    |
 
 ```bash
-# Download `CRNN-Synth90k-e9341ede.pth.tar` weights to `./results/pretrained_models`
+# Download `GRCNN-MJSynth-4a8f5d33.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
-python predict.py --image_path ./figures/Available.png --weights_path ./results/pretrained_models/CRNN-MJSynth-e9341ede.pth.tar
+python predict.py --image_path ./figures/Available.png --weights_path ./results/pretrained_models/GRCNN-MJSynth-4a8f5d33.pth.tar
 ```
 
 Input: <span align="center"><img src="figures/Available.png"/></span>
@@ -78,8 +78,8 @@ Input: <span align="center"><img src="figures/Available.png"/></span>
 Output:
 
 ```text
-Build CRNN model successfully.
-Load CRNN model weights `./results/pretrained_models/CRNN-MJSynth-e9341ede.pth.tar` successfully.
+Build GRCNN model successfully.
+Load GRCNN model weights `./results/pretrained_models/GRCNN-MJSynth-4a8f5d33.pth.tar` successfully.
 ``./figures/Available.png` -> `available`
 ```
 
@@ -121,4 +121,3 @@ Street View Text (SVT) and ICDAR
  year      = {2017}
 }
 ```
-

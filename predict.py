@@ -21,12 +21,12 @@ from torch.nn import functional as F
 import config
 import imgproc
 from decoder import ctc_decode
-from model import CRNN
+from model import GRCNN
 
 
 def main(args):
     # Initialize the model
-    model = CRNN(config.model_num_classes)
+    model = GRCNN(config.model_num_classes)
     model = model.to(device=config.device)
     print("Build CRNN model successfully.")
 
@@ -65,7 +65,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CRNN model predicts character content in images.")
+    parser = argparse.ArgumentParser(description="GRCNN model predicts character content in images.")
     parser.add_argument("--image_path", type=str, help="Character image address to be tested.")
     parser.add_argument("--weights_path", type=str, help="Txt file containing the path to the dataset file.")
     args = parser.parse_args()

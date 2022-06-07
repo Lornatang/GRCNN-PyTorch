@@ -21,7 +21,7 @@ from torch.utils.data import DataLoader
 import config
 from dataset import ImageDataset, valid_test_collate_fn
 from decoder import ctc_decode
-from model import CRNN
+from model import GRCNN
 
 
 def load_dataloader() -> DataLoader:
@@ -48,14 +48,14 @@ def load_dataloader() -> DataLoader:
 
 def build_model() -> nn.Module:
     # Initialize the model
-    model = CRNN(config.model_num_classes)
+    model = GRCNN(config.model_num_classes)
     model = model.to(device=config.device)
-    print("Build CRNN model successfully.")
+    print("Build GRCNN model successfully.")
 
     # Load the CRNN model weights
     checkpoint = torch.load(config.model_path, map_location=lambda storage, loc: storage)
     model.load_state_dict(checkpoint["state_dict"])
-    print(f"Load CRNN model weights `{os.path.abspath(config.model_path)}` successfully.")
+    print(f"Load GRCNN model weights `{os.path.abspath(config.model_path)}` successfully.")
 
     # Start the verification mode of the model.
     model.eval()

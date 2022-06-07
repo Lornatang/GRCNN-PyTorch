@@ -77,4 +77,4 @@ if mode == "test":
     dataroot = "./data/SVT"
     annotation_file_name = "annotation_test.txt"
 
-    model_path = "results/pretrained_models/GRCNN-MJSynth-e9341ede.pth.tar"
+    model_path = "results/pretrained_models/GRCNN-MJSynth-4a8f5d33.pth.tar"
